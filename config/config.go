@@ -14,6 +14,11 @@ type Config struct {
 	UploadDir        string
 	MaxUploadSizeMB  int
 	AllowedFileTypes []string
+	DbHost		 	 string
+	DbPort		 	 int
+	DbUser		 	 string
+	DbPassword		 string
+	DbName		 	 string
 }
 
 var AppConfig Config
@@ -29,6 +34,11 @@ func LoadConfig() {
 		UploadDir:        getEnv("UPLOAD_DIR", "./uploads"),
 		MaxUploadSizeMB:  getEnvAsInt("MAX_UPLOAD_SIZE_MB", 50),
 		AllowedFileTypes: strings.Split(getEnv("ALLOWED_FILE_TYPES", "application/pdf,text/csv,application/vnd.openxmlformats-officedocument.wordprocessingml.document"), ","),
+		DbHost:		  	  getEnv("DB_HOST", "localhost"),
+		DbPort:		  	  getEnvAsInt("DB_PORT", 5432),
+		DbUser:		  	  getEnv("DB_USER", "user"),
+		DbPassword:	      getEnv("DB_PASSWORD", "password"),
+		DbName:		      getEnv("DB_NAME", "document_uploader"),
 	}
 	log.Printf("Config loaded: %+v\n", AppConfig)
 }

@@ -25,6 +25,10 @@ func ProcessUploadTask(task models.Task) {
         User:       task.UploadedBy,
         Checksum:   checksum,
         UploadedAt: time.Now(),
+        SizeBytes:  task.SizeBytes,
+        SizeKB:     task.SizeKB,
+        SizeMB:     task.SizeMB,
+        FilePath:   task.FilePath,
     }
 
     err = database.SaveUploadedFile(record)

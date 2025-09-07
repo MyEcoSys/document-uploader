@@ -1,18 +1,26 @@
 package main
 
 import (
-	"log"
-
 	"github.com/MyEcoSys/document-uploader/config"
+	"github.com/MyEcoSys/document-uploader/database"
 	"github.com/MyEcoSys/document-uploader/server"
 )
 
 
 func main() {
-	config.LoadConfig()
-	server := server.NewServer()
+	// Load configuration
+	//client, err := gdrive.NewGDriveClient("google_client_secret.json")
+	//if err != nil {
+	//	log.Fatalf("Failed to initialize Google Drive client: %v", err)
+	//}
+	//_ = client // Use the client as needed
 
-	server.SetupRoutes()
+	//client.UploadFile("test.txt", "text/plain", "root")
+
+	config.LoadConfig()
+	
+	database.InitDB()
+	
+	server := server.NewServer()
 	server.Start()
-	log.Println("Server started")
 }
